@@ -1,6 +1,7 @@
 > 中国联通APP登录 签到 金币 任务 解流量封顶    [联通用户TG交流群](https://t.me/HiCnUnicom)
 新增使用github自动运行，无需自己的服务器
 教程：
+
 1、Fork 本仓库
 
 2、在你 Fork 的本仓库下的 Settings -> Secrets 页面追加以下几个secret秘密环境变量
