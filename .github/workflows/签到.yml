@@ -22,15 +22,12 @@ jobs:
         - name: Install depends
           run: |
                 sudo apt-get update
-                
-        - name: appid Setting
-          env:
-           appid: ${{ secrets.APPID }}
-         
+               
         - name: Run 号码1
           env:
            haoma: ${{ secrets.HAOMA }}
            mm: ${{ secrets.MM }}
+           appid: ${{ secrets.APPID }}
           run: |
            bash CnUnicom.sh ${haoma} ${mm} ${appid}.
            
@@ -38,5 +35,6 @@ jobs:
           env:
            haoma: ${{ secrets.HAOMA2 }}
            mm: ${{ secrets.MM }}
+           appid: ${{ secrets.APPID }}
           run: |
            bash CnUnicom.sh ${haoma} ${mm} ${appid}
