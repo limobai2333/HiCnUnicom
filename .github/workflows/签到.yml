@@ -22,13 +22,21 @@ jobs:
         - name: Install depends
           run: |
                 sudo apt-get update
-        - name: Run 号码1
-          if [[ '${{ secrets.HAOMA }}' == '' || '${{ secrets.MM }}' == ''  ]];  fi
-          if [ '${{ secrets.HAOMA }}' != '' ]; then sed -i "s/^haoma=.*$/haoma='${{ secrets.HAOMA }}'/" .env; fi
-          if [ '${{ secrets.MM }}' != '' ]; then sed -i "s/^mm=.*$/mm='${{ secrets.MM }}'/" .env; fi
+                
+        - name: appid Setting
           env:
-           #haoma: ${{ secrets.HAOMA }}
-           #mm: ${{ secrets.MM }}
            appid: ${{ secrets.APPID }}
+         
+        - name: Run 号码1
+          env:
+           haoma: ${{ secrets.HAOMA }}
+           mm: ${{ secrets.MM }}
+          run: |
+           bash CnUnicom.sh ${haoma} ${mm} ${appid}.
+           
+        - name: Run 号码2
+          env:
+           haoma: ${{ secrets.HAOMA2 }}
+           mm: ${{ secrets.MM }}
           run: |
            bash CnUnicom.sh ${haoma} ${mm} ${appid}
