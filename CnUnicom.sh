@@ -89,12 +89,12 @@ EOF
     #fi
 }
 
-function openChg() {
+#function openChg() {
     # 每月一号办理解除40G封顶业务
-    [[ "$(date "+%d")" == "01" ]] || return 0
-    echo; echo $(date) starting dingding OpenChg...
-    curl -sA "$UA" -b $workdir/cookie --data "querytype=02&opertag=0" "https://m.client.10010.com/mobileService/businessTransact/serviceOpenCloseChg.htm" >/dev/null
-}
+    #[[ "$(date "+%d")" == "01" ]] || return 0
+    #echo; echo $(date) starting dingding OpenChg...
+    #curl -sA "$UA" -b $workdir/cookie --data "querytype=02&opertag=0" "https://m.client.10010.com/mobileService/businessTransact/serviceOpenCloseChg.htm" >/dev/null
+#}
 
 function membercenter() {
     echo; echo $(date) starting membercenter...
