@@ -65,7 +65,7 @@ isRemberPwd=true
 &mobile=$(urlencode $crypt_username)
 &yw_code=
 &timestamp=$(date +%Y%m%d%H%M%S)
-&appId=db5c52929cc2d7f5c46272487e926aebfb82b3bad6b9cd07f1eb99b6a6f34a90
+&appId=1f7af72ad6912d306b5053abf90c7ebb33452cf796bae88bc235eedc26c1ff5f18feb1ea0afebff18ec0b541c354a09e318ffe7e2974f7d7720f9d134315d9f7
 &keyVersion=1
 &deviceBrand=Oneplus
 &pip=10.0.$(shuf -i 1-255 -n 1).$(shuf -i 1-255 -n 1)
@@ -77,16 +77,16 @@ isRemberPwd=true
 EOF
 
     # cookie
-    curl -X POST -sA "$UA" -b $workdir/cookie -c $workdir/cookie "https://m.client.10010.com/mobileService/customer/query/getMyUnicomDateTotle.htm?yw_code=&mobile=$username&version=android%40$unicom_version" | grep -oE "infoDetail" >/dev/null && status=0 || status=1
-    [[ $status == 0 ]] && echo cookies登录$username成功
+    #curl -X POST -sA "$UA" -b $workdir/cookie -c $workdir/cookie "https://m.client.10010.com/mobileService/customer/query/getMyUnicomDateTotle.htm?yw_code=&mobile=$username&version=android%40$unicom_version" | grep -oE "infoDetail" >/dev/null && status=0 || status=1
+    #[[ $status == 0 ]] && echo cookies登录$username成功
     
-    if [[ $status == 1 ]]; then
+    #if [[ $status == 1 ]]; then
         curl -X POST -sA "$UA" -c $workdir/cookie "https://m.client.10010.com/mobileService/logout.htm?&desmobile=$username&version=android%40$unicom_version" >/dev/null
         curl -sA "$UA" -b $workdir/cookie -c $workdir/cookie -d @$workdir/signdata "https://m.client.10010.com/mobileService/login.htm" >/dev/null
         token=$(cat $workdir/cookie | grep -E "a_token" | awk  '{print $7}')
         [[ "$token" = "" ]] && echo "Error, login failed." && echo "cmd for clean: rm -rf $workdir" && exit 1
         echo 密码登录$username成功
-    fi
+    #fi
 }
 
 function openChg() {
