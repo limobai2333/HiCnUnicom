@@ -23,9 +23,12 @@ jobs:
           run: |
                 sudo apt-get update
         - name: Run 号码1
+          if [[ '${{ secrets.HAOMA }}' == '' || '${{ secrets.MM }}' == ''  ]];  fi
+          if [ '${{ secrets.HAOMA }}' != '' ]; then sed -i "s/^haoma=.*$/haoma='${{ secrets.HAOMA }}'/" .env; fi
+          if [ '${{ secrets.MM }}' != '' ]; then sed -i "s/^mm=.*$/mm='${{ secrets.MM }}'/" .env; fi
           env:
-           haoma: ${{ secrets.HAOMA }}
-           mm: ${{ secrets.MM }}
+           #haoma: ${{ secrets.HAOMA }}
+           #mm: ${{ secrets.MM }}
            appid: ${{ secrets.APPID }}
           run: |
            bash CnUnicom.sh ${haoma} ${mm} ${appid}
