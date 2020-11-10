@@ -1,4 +1,3 @@
-
 # coding=utf-8
 # author:@QiuYueBai
 
@@ -80,4 +79,3 @@ if __name__ == '__main__':
     data = timestamp+"这部分自己按要求抓包提取"
 
     user.sign(data)
-
