@@ -148,13 +148,7 @@ function membercenter() {
     curl -X POST -sA "$UA" -b $workdir/cookie.SigninActivity -e "$Referer" "https://act.10010.com/SigninApp/signin/todaySign"
     echo
     curl -X POST -sA "$UA" -b $workdir/cookie.SigninActivity -e "$Referer" "https://act.10010.com/SigninApp/signin/addIntegralDA"
-    ##签到视频翻倍赠送积分
-    Referer="https://img.client.10010.com/activitys/member/index.html"
-    data="yw_code=&desmobile=$username&version=android@$unicom_version"
-    curl -sLA "$UA" -b $workdir/cookie -c $workdir/cookie.SigninActivity -e "$Referer" "https://act.10010.com/SigninApp/signin/querySigninActivity.htm?$data" >/dev/null
-    Referer="https://act.10010.com/SigninApp/signin/querySigninActivity.htm?$data"
-    echo
-    curl -X POST -sA "$UA" -b $workdir/cookie.SigninActivity -e "$Referer" "https://act.10010.com/SigninApp/signin/bannerAdPlayingLogo"
+    
     ##三次金币抽奖， 每日最多可花费金币执行十三次
     usernumberofjsp=$(curl -sA "$UA" -b $workdir/cookie.SigninActivity https://m.client.10010.com/dailylottery/static/textdl/userLogin | grep -oE "encryptmobile=\w*" | awk -F"encryptmobile=" '{print $2}'| head -n1)
     for((i = 1; i <= 3; i++)); do
@@ -184,6 +178,8 @@ function membercenter() {
     echo; curl -X POST -sA "$UA" -b $workdir/cookie.xybx --data "methodType=reward&deviceType=Android&clientVersion=$unicom_version&isVideo=N" https://m.client.10010.com/game_box
     #宝箱任务100M
     echo; curl -sA "$UA" -b $workdir/cookie.xybx --data "methodType=taskGetReward&deviceType=Android&clientVersion=$unicom_version&taskCenterId=98" https://m.client.10010.com/producGameTaskCenter
+    ##游戏宝箱翻倍
+    echo; curl -X POST -sA "$UA" -b $workdir/cookie.xybx --data "methodType=reward&deviceType=Android&clientVersion=$unicom_version&isVideo=Y" https://m.client.10010.com/game_box
     
     #沃之树浇水
     curl -X POST -sA "$UA" -b $workdir/cookie.SigninActivity -c $workdir/cookie.wotree --data "thirdUrl=https%3A%2F%2Fimg.client.10010.com%2Fmactivity%2FwoTree%2Findex.html%23%2F" https://m.client.10010.com/mobileService/customer/getShareRedisInfo.htm >/dev/null
@@ -202,14 +198,27 @@ function membercenter() {
     done
 }
 
+function jfdouble() {
+    echo; echo $(date) 开始 积分翻倍...
+    
+    #签到
+    Referer="https://img.client.10010.com/activitys/member/index.html"
+    data="yw_code=&desmobile=$username&version=android@$unicom_version"
+    curl -sLA "$UA" -b $workdir/cookie -c $workdir/cookie.SigninActivity -e "$Referer" "https://act.10010.com/SigninApp/signin/querySigninActivity.htm?$data" >/dev/null
+    Referer="https://act.10010.com/SigninApp/signin/querySigninActivity.htm?$data"
+    ##签到视频翻倍赠送积分
+    echo
+    curl -X POST -sA "$UA" -b $workdir/cookie.SigninActivity -e "$Referer" "https://act.10010.com/SigninApp/signin/bannerAdPlayingLogo"
+}
+
 function main() {
     #sleep $(shuf -i 1-10800 -n 1)
     login
     membercenter
+    jfdouble
     #openChg
     #rm -rf $workdir
     echo; echo $(date) $username Accomplished.  Thanks!
 }
 
 main
-
