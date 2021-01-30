@@ -5,16 +5,16 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin && expor
 ### bash <(curl -s https://raw.githubusercontent.com/mixool/HiCnUnicom/master/CnUnicom.sh) membercenter 13800008888@112233 18388880000@123456
 
 # 传入参数格式，支持多账号，手机号@密码必需：13800008888@112233 18388880000@123456
-[[ $# != 0 ]] && all_parameter=($(echo $@)) || { echo 'Err  !!! Useage: bash this_script.sh membercenter 15614200616@280216'; exit 1; }
-all_username_password=($(echo ${all_parameter[*]} | grep -oE "[0-9]{11}@[0-9]{6}"| sort -u | tr "\n" " "))
+#[[ $# != 0 ]] && all_parameter=($(echo $@)) || { echo 'Err  !!! Useage: bash this_script.sh membercenter 15614200616@280216'; exit 1; }
+#all_username_password=($(echo ${all_parameter[*]} | grep -oE "[0-9]{11}@[0-9]{6}"| sort -u | tr "\n" " "))
 
 # 登录失败尝试修改以下这个appId的值为抓包获取的登录过的联通app,也可使用传入参数 appId@*************
-appId@1f7af72ad6912d306b5053abf90c7ebbecb54b51b16c8c5c6f11d5a655653fb30999d00e3555c341f4f8afa53a55248ad7036ed1b67b69e968ae8aea142ded03
-echo ${all_parameter[*]} | grep -qE "appId@[a-z0-9]+" && appId=$(echo ${all_parameter[*]} | grep -oE "appId@[a-z0-9]+" | cut -f2 -d@)
+#appId@1f7af72ad6912d306b5053abf90c7ebbecb54b51b16c8c5c6f11d5a655653fb30999d00e3555c341f4f8afa53a55248ad7036ed1b67b69e968ae8aea142ded03
+#echo ${all_parameter[*]} | grep -qE "appId@[a-z0-9]+" && appId=$(echo ${all_parameter[*]} | grep -oE "appId@[a-z0-9]+" | cut -f2 -d@)
 
 # deviceId: 随机IMEI,也可使用传入参数 deviceId@*************
-deviceId=$(shuf -i 123456789012345-987654321012345 -n 1)
-echo ${all_parameter[*]} | grep -qE "deviceId@[0-9]+" && deviceId=$(echo ${all_parameter[*]} | grep -oE "deviceId@[0-9]+" | cut -f2 -d@)
+#deviceId=$(shuf -i 123456789012345-987654321012345 -n 1)
+#echo ${all_parameter[*]} | grep -qE "deviceId@[0-9]+" && deviceId=$(echo ${all_parameter[*]} | grep -oE "deviceId@[0-9]+" | cut -f2 -d@)
 
 #####
 ## 流量激活功能需要传入参数,中间d表示每天,w表示每周一,m代表每月初,格式： liulactive@d@ff80808166c5ee6701676ce21fd14716
