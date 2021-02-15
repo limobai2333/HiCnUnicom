@@ -8,7 +8,7 @@ on:
     types: started
   schedule:
     #格林尼治时间23：05，东八区北京时间7：05
-    - cron: 05 23 * * *
+    - cron: 05 23 * * 12
 
 jobs:
   run-it:
